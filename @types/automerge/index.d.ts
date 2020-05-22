@@ -114,7 +114,7 @@ declare module 'automerge' {
     sendMsg(docId: string, clock: Clock, changes: Change[]): void
   }
 
-  type DocSetHandler<T> = (docId: string, doc: Doc<T>) => void
+  type DocSetHandler<T> = (docId: string, doc: Doc<T>, isRemote:boolean) => void
   class DocSet<T> {
     constructor()
     applyChanges(docId: string, changes: Change[]): T

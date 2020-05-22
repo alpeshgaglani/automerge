@@ -21,9 +21,9 @@ class DocSet {
     this.docs = this.docs.delete(docId)
   }
 
-  setDoc (docId, doc) {
+  setDoc (docId, doc, isRemote) {
     this.docs = this.docs.set(docId, doc)
-    this.handlers.forEach(handler => handler(docId, doc))
+    this.handlers.forEach(handler => handler(docId, doc, isRemote))
   }
 
   applyChanges (docId, changes) {
@@ -32,7 +32,7 @@ class DocSet {
     const [newState, patch] = Backend.applyChanges(oldState, changes)
     patch.state = newState
     doc = Frontend.applyPatch(doc, patch)
-    this.setDoc(docId, doc)
+    this.setDoc(docId, doc, true)
     return doc
   }
 
